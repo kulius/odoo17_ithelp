@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_library_student_tree" model="ir.ui.view">
+        <field name="name">library.student.tree</field>
+        <field name="model">library.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="姓名"/>
+                <field name="student_number" string="學號"/>
+                <field name="class_name" string="班級"/>
+                <field name="email" string="電子郵件"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_student_form" model="ir.ui.view">
+        <field name="name">library.student.form</field>
+        <field name="model">library.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" string="姓名"/>
+                        <field name="student_number" string="學號"/>
+                        <field name="class_name" string="班級"/>
+                        <field name="email" string="電子郵件"/>
+                        <field name="phone" string="電話"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 學生管理動作 -->
+    <record id="action_library_students" model="ir.actions.act_window">
+        <field name="name">學生管理</field>
+        <field name="res_model">library.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

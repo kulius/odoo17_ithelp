@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_library_book,書籍管理,model_library_book,,1,1,1,1
+access_library_student,學生管理,model_library_student,,1,1,1,1
+access_library_book_category,書籍分類管理,model_library_book_category,,1,1,1,1
