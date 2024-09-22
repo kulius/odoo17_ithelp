@@ -1,0 +1,14 @@
+<odoo>
+    <!-- 繼承 res.users 表單視圖，添加 student_id 欄位 -->
+    <record id="view_res_users_form_inherit_student" model="ir.ui.view">
+        <field name="name">res.users.form.inherit.student</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form"/>
+        <field name="arch" type="xml">
+            <!-- 在視圖中的適當位置添加 student_id 欄位 -->
+            <xpath expr="//field[@name='tz_offset']" position="after">
+                    <field name="student_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

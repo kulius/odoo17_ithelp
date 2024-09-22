@@ -3,11 +3,15 @@
     'version': '17.0',
     'depends': ['base', 'mail'],
     'data': [
+        'security/ir.model.access.csv',
         'views/library_book_views.xml',
         'views/library_student_views.xml',
         'views/library_book_category_views.xml',
+
+        'views/res_users_views.xml',
+
         'views/library_management_menu.xml',
-        'security/ir.model.access.csv',
+
     ],
     'installable': True,
     'application': True,
