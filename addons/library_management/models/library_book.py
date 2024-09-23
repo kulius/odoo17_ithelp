@@ -32,3 +32,46 @@ class LibraryBook(models.Model):
             record.is_borrowed = False
             record.return_date = date.today()
             record.message_post(body=f'書籍 {record.name} 已於 {record.return_date} 歸還。')
+
+
+    @api.depends('is_borrowed')
+    def is_book_available(self):
+        """
+        檢查書籍當前是否可借閱。
+        如果書籍已被借出，返回 False；如果可借，返回 True。
+        """
+        for record in self:
+            if record.is_borrowed:
+                record.message_post(body=f"書籍 {record.name} 已被借出。")
+                raise exceptions.UserError(f'書籍 {record.name} 已被借出，無法借閱。')
+            return True
+
+    def action_check_availability(self):
+        """
+        行動按鈕：檢查書籍的可用性，顯示是否可借。
+        """
+        for record in self:
+            if record.is_borrowed:
+                raise exceptions.UserError(f'書籍 {record.name} 已被借出。')
+            else:
+                raise exceptions.UserError(f'書籍 {record.name} 可借閱。')
+
+    def action_borrow(self):
+        """
+        當書籍可借閱時，允許讀者借閱，並記錄借閱信息
+        """
+        for record in self:
+            if record.is_borrowed:
+                raise exceptions.UserError(f"書籍 {record.name} 已被借出，無法再次借閱。")
+
+            # 檢查是否已關聯借閱學生
+            if not record.borrowed_by:
+                raise exceptions.UserError('請選擇借閱的學生。')
+
+            # 更新書籍狀態為已借出，並記錄借閱日期
+            record.is_borrowed = True
+            record.borrow_date = date.today()
+
+            # 生成消息記錄
+            record.message_post(
+                body=f"書籍 {record.name} 已於 {record.borrow_date} 被學生 {record.borrowed_by.name} 借閱。")

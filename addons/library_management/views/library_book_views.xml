@@ -38,4 +38,49 @@
         <field name="res_model">library.book</field>
         <field name="view_mode">tree,form</field>
     </record>
+
+
+    <!-- 書籍列表視圖，讀者只能查看書籍，不允許新增 -->
+    <record id="view_library_book_tree_readonly" model="ir.ui.view">
+        <field name="name">library.book.tree.readonly</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree create="false" delete="false">
+                <field name="name" string="書名"/>
+                <field name="author" string="作者"/>
+                <field name="isbn" string="ISBN"/>
+                <field name="is_borrowed" string="是否已借出"/>
+                <field name="borrowed_by" />
+                <!-- 添加借出按鈕，使用 modifiers 來控制可見性 -->
+                <button name="action_borrow" type="object" string="借出" class="btn-primary"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- 搜尋視圖 -->
+    <record id="view_library_book_search" model="ir.ui.view">
+        <field name="name">library.book.search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="書名"/>
+                <field name="author" string="作者"/>
+                <field name="isbn" string="ISBN"/>
+                <filter string="可借閱" name="available_books" domain="[('is_borrowed', '=', False)]"/>
+                <filter string="已借出" name="borrowed_books" domain="[('is_borrowed', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- 專門供讀者使用的書籍操作動作，隱藏新增按鈕 -->
+    <record id="action_library_books_readonly" model="ir.actions.act_window">
+        <field name="name">書籍可用性檢查</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_library_book_tree_readonly"/>
+        <field name="search_view_id" ref="view_library_book_search"/>
+        <field name="help" type="html">
+            <p>此處可以查看書籍的可用狀態，您可以根據書名、作者、ISBN進行篩選。</p>
+        </field>
+    </record>
 </odoo>

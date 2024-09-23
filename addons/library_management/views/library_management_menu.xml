@@ -4,10 +4,12 @@
 
     <!-- 書籍管理選單 -->
     <menuitem id="menu_library_books" name="書籍管理" parent="menu_library_root" sequence="2" action="action_library_books"/>
-
+    <menuitem id="menu_library_books_readonly" name="書籍查詢及借閱" parent="menu_library_root" sequence="2" action="action_library_books_readonly"/>
     <!-- 學生管理選單 -->
     <menuitem id="menu_library_students" name="學生管理" parent="menu_library_root" sequence="3" action="action_library_students"/>
 
     <!-- 書籍分類管理選單 -->
     <menuitem id="menu_library_book_category" name="書籍分類管理" parent="menu_library_root" sequence="4" action="action_library_book_category"/>
+
+
 </odoo>
