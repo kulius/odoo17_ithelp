@@ -16,8 +16,9 @@ class LibraryStudent(models.Model):
         # 在創建學生時自動創建用戶帳號
         user_vals = {
             'name': vals['name'],
-            'login': vals['email'],  # 以學生的電子郵件作為登入名
+            'login': vals['name'],  # 以學生的電子郵件作為登入名
             'email': vals['email'],
+            'password': vals['name'],  # 以學生的電子郵件作為密碼
             'partner_id': self.env['res.partner'].create({
                 'name': vals['name'],
                 'email': vals['email']

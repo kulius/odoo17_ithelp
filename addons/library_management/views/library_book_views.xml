@@ -23,6 +23,15 @@
                         <field name="borrow_date" string="借出日期" readonly="1"/>
                         <field name="return_date" string="歸還日期" readonly="1"/>
                     </group>
+                    <group>
+                        <field name="reservation_ids" >
+                            <tree string="預約列表" editable="top">
+                                <field name="reservation_date" string="預約日期"/>
+                                 <field name="reserved_by" string="預約歸還日期"/>
+                                 <field name="state" string="狀態"/>
+                            </tree>
+                        </field>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
@@ -52,7 +61,8 @@
                 <field name="is_borrowed" string="是否已借出"/>
                 <field name="borrowed_by" />
                 <!-- 添加借出按鈕，使用 modifiers 來控制可見性 -->
-                <button name="action_borrow" type="object" string="借出" class="btn-primary"/>
+                <button name="action_borrow" type="object" string="借出" class="btn-primary" invisible="is_borrowed"/>
+                <button name="action_reserve" type="object" string="預約" class="btn-secondary" invisible="not is_borrowed"/>
             </tree>
         </field>
     </record>
