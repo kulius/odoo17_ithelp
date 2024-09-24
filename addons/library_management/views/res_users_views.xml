@@ -9,6 +9,7 @@
             <xpath expr="//field[@name='tz_offset']" position="after">
                     <field name="student_id" options="{'no_create': True}"/>
             </xpath>
+
         </field>
     </record>
 </odoo>

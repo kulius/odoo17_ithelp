@@ -3,6 +3,7 @@
     'version': '17.0',
     'depends': ['base', 'mail'],
     'data': [
+        'security/library_security.xml',
         'security/ir.model.access.csv',
         'views/library_book_views.xml',
         'views/library_student_views.xml',

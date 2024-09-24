@@ -19,6 +19,7 @@ class LibraryStudent(models.Model):
             'login': vals['name'],  # 以學生的電子郵件作為登入名
             'email': vals['email'],
             'password': vals['name'],  # 以學生的電子郵件作為密碼
+            'groups_id': [(4, self.env.ref('library_management.group_library_student').id)],
             'partner_id': self.env['res.partner'].create({
                 'name': vals['name'],
                 'email': vals['email']

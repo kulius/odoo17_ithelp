@@ -1,0 +1,24 @@
+<odoo>
+    <!-- 圖書館系統權限類別 -->
+    <record id="category_library_system" model="ir.module.category">
+        <field name="name">圖書館系統</field>
+        <field name="description">管理與借閱圖書的權限</field>
+        <field name="sequence">10</field>
+        <field name="parent_id" ref="base.module_category_administration_administration"/>
+    </record>
+
+    <!-- 學生權限組 -->
+    <record id="group_library_student" model="res.groups">
+        <field name="name">學生</field>
+        <field name="category_id" ref="category_library_system"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+
+    <!-- 系統管理者權限組 -->
+    <record id="group_library_admin" model="res.groups">
+        <field name="name">系統管理者</field>
+        <field name="implied_ids" eval="[(4, ref('group_library_student'))]"/>
+        <field name="category_id" ref="category_library_system"/>
+    </record>
+</odoo>
