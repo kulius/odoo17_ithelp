@@ -1,0 +1,57 @@
+<odoo>
+    <!-- 借閱記錄的樹狀視圖 -->
+    <record id="view_library_book_loan_tree" model="ir.ui.view">
+        <field name="name">library.book.loan.tree</field>
+        <field name="model">library.book.loan</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="book_id" string="書籍"/>
+                <field name="student_id" string="學生"/>
+                <field name="loan_date" string="借閱日期"/>
+                <field name="expected_return_date" string="預計歸還日期"/>
+                <field name="actual_return_date" string="實際歸還日期"/>
+                <field name="state" string="狀態"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- 借閱記錄的表單視圖 -->
+    <record id="view_library_book_loan_form" model="ir.ui.view">
+        <field name="name">library.book.loan.form</field>
+        <field name="model">library.book.loan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="book_id" string="書籍"/>
+                        <field name="student_id" string="學生"/>
+                    </group>
+                    <group>
+                        <field name="loan_date" string="借閱日期"/>
+                        <field name="expected_return_date" string="預計歸還日期"/>
+                        <field name="actual_return_date" string="實際歸還日期"/>
+                        <field name="state" string="狀態" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- 借閱記錄的動作 -->
+    <record id="action_library_book_loans" model="ir.actions.act_window">
+        <field name="name">借閱記錄管理</field>
+        <field name="res_model">library.book.loan</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+        <!-- 學生借閱歷史的動作 -->
+    <record id="action_library_student_loans" model="ir.actions.act_window">
+        <field name="name">我的借閱歷史</field>
+        <field name="res_model">library.book.loan</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('student_id.user_id', '=', uid)]</field>
+        <field name="context">{'search_default_ongoing': 1}</field>
+    </record>
+
+</odoo>

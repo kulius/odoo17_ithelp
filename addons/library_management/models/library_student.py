@@ -10,6 +10,7 @@ class LibraryStudent(models.Model):
     email = fields.Char(string='電子郵件')
     phone = fields.Char(string='電話')
     user_id = fields.Many2one('res.users', string='系統用戶', help='該學生對應的系統用戶')
+    loan_ids = fields.One2many('library.book.loan', 'student_id', string='借閱記錄')
 
     @api.model
     def create(self, vals):

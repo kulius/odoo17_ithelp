@@ -1,5 +1,5 @@
 from odoo import models, fields, api, exceptions
-from datetime import date
+from datetime import date, timedelta
 
 class LibraryBook(models.Model):
     _name = 'library.book'
@@ -15,6 +15,7 @@ class LibraryBook(models.Model):
     borrow_date = fields.Date(string='借出日期', readonly=True, tracking=True)
     return_date = fields.Date(string='歸還日期', readonly=True, tracking=True)
     reservation_ids = fields.One2many('library.book.reservation', 'book_id', string='預約列表')
+    loan_ids = fields.One2many('library.book.loan', 'book_id', string='借閱記錄')
 
     def action_reserve(self):
         """
@@ -40,36 +41,6 @@ class LibraryBook(models.Model):
                 'sticky': False,  # 如果設置為 True，消息不會自動消失
             }
         }
-
-    def action_return(self):
-        """
-        書籍歸還操作：更新書籍狀態為「未借出」，記錄歸還日期，並通知預約讀者。
-        """
-        if not self.is_borrowed:
-            raise exceptions.UserError('書籍尚未借出，無法執行歸還操作。')
-
-        # 更新書籍狀態為未借出
-        self.is_borrowed = False
-        self.return_date = date.today()
-
-        # 清空借閱人信息
-        self.borrowed_by = None
-
-        # 生成消息記錄
-        self.message_post(body=f"書籍 {self.name} 已於 {self.return_date} 歸還。")
-
-        # 通知下一位預約的讀者
-        next_reservation = self.env['library.book.reservation'].search([
-            ('book_id', '=', self.id),
-            ('state', '=', 'pending')
-        ], order='reservation_date asc', limit=1)
-
-        if next_reservation:
-            next_reservation.write({'state': 'notified'})
-            self.message_post(body=f"書籍 {self.name} 已通知讀者 {next_reservation.reserved_by.name} 可借閱。")
-            # 這裡可以加入郵件或訊息通知功能
-        return True
-
 
     @api.depends('is_borrowed')
     def is_book_available(self):
@@ -109,6 +80,58 @@ class LibraryBook(models.Model):
             record.is_borrowed = True
             record.borrow_date = date.today()
 
+            # 設定預計歸還日期，假設借閱期為14天
+            expected_return = record.borrow_date + timedelta(days=14)
+
+            # 創建借閱記錄
+            self.env['library.book.loan'].create({
+                'book_id': record.id,
+                'student_id': record.borrowed_by.id,
+                'loan_date': record.borrow_date,
+                'expected_return_date': expected_return,
+            })
+
             # 生成消息記錄
             record.message_post(
-                body=f"書籍 {record.name} 已於 {record.borrow_date} 被學生 {record.borrowed_by.name} 借閱。")
+                body=f"書籍 {record.name} 已於 {record.borrow_date} 被學生 {record.borrowed_by.name} 借閱，預計歸還日期為 {expected_return}。")
+
+    def action_return(self):
+        """
+        書籍歸還操作：更新書籍狀態為「未借出」，記錄歸還日期，並更新借閱記錄。
+        """
+        for record in self:
+            if not record.is_borrowed:
+                raise exceptions.UserError('書籍尚未借出，無法執行歸還操作。')
+
+            # 更新書籍狀態為未借出
+            record.is_borrowed = False
+            record.return_date = date.today()
+
+            # 更新借閱記錄
+            loan = self.env['library.book.loan'].search([
+                ('book_id', '=', record.id),
+                ('student_id', '=', record.borrowed_by.id),
+                ('state', '=', 'ongoing')
+            ], limit=1)
+            if loan:
+                loan.actual_return_date = record.return_date
+                loan.state = 'returned'
+
+            # 清空借閱人信息
+            record.borrowed_by = None
+
+            # 生成消息記錄
+            record.message_post(body=f"書籍 {record.name} 已於 {record.return_date} 歸還。")
+
+            # 通知下一位預約的讀者
+            next_reservation = self.env['library.book.reservation'].search([
+                ('book_id', '=', record.id),
+                ('state', '=', 'pending')
+            ], order='reservation_date asc', limit=1)
+
+            if next_reservation:
+                next_reservation.write({'state': 'notified'})
+                record.message_post(body=f"書籍 {record.name} 已通知讀者 {next_reservation.reserved_by.name} 可借閱。")
+                # 這裡可以加入郵件或訊息通知功能
+
+            return True

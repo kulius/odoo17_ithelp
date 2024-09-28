@@ -31,6 +31,15 @@
                                  <field name="state" string="狀態"/>
                             </tree>
                         </field>
+                        <field name="loan_ids">
+                            <tree>
+                                <field name="student_id" string="學生"/>
+                                <field name="loan_date" string="借閱日期"/>
+                                <field name="expected_return_date" string="預計歸還日期"/>
+                                <field name="actual_return_date" string="實際歸還日期"/>
+                                <field name="state" string="狀態"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
                 <div class="oe_chatter">

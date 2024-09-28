@@ -24,6 +24,15 @@
                         <field name="class_name" string="班級"/>
                         <field name="email" string="電子郵件"/>
                         <field name="phone" string="電話"/>
+                        <field name="loan_ids">
+                            <tree>
+                                <field name="book_id" string="書籍"/>
+                                <field name="loan_date" string="借閱日期"/>
+                                <field name="expected_return_date" string="預計歸還日期"/>
+                                <field name="actual_return_date" string="實際歸還日期"/>
+                                <field name="state" string="狀態"/>
+                            </tree>
+                        </field>
                     </group>
                 </sheet>
             </form>
