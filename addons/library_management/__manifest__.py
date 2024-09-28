@@ -1,7 +1,7 @@
 {
     'name': 'Library Management',
     'version': '17.0',
-    'depends': ['base', 'mail'],
+    'depends': ['base', 'mail', 'website'],
     'data': [
         'security/library_security.xml',
         'security/ir.model.access.csv',
@@ -12,6 +12,7 @@
         'views/library_book_category_views.xml',
 
         'views/res_users_views.xml',
+        'views/library_book_templates.xml',
 
         'data/ir_cron_data.xml',
         'data/mail_template_data.xml',
