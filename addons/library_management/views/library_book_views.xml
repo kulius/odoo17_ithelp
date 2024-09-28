@@ -1,4 +1,18 @@
 <odoo>
+    <!-- 書籍列表視圖，讀者只能查看書籍，不允許新增 -->
+    <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="書名"/>
+                <field name="author" string="作者"/>
+                <field name="isbn" string="ISBN"/>
+                <field name="is_borrowed" string="是否已借出"/>
+                <field name="borrowed_by" />
+            </tree>
+        </field>
+    </record>
     <record id="view_library_book_form" model="ir.ui.view">
         <field name="name">library.book.form</field>
         <field name="model">library.book</field>
@@ -50,11 +64,13 @@
             </form>
         </field>
     </record>
+
         <!-- 書籍管理動作 -->
     <record id="action_library_books" model="ir.actions.act_window">
         <field name="name">書籍管理</field>
         <field name="res_model">library.book</field>
         <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_library_book_tree"/>
     </record>
 
 

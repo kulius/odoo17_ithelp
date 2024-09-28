@@ -3,6 +3,14 @@
         <t t-call="website.layout">
             <div class="container mt-5">
                 <h1 class="mb-4">圖書列表</h1>
+                <form method="get" action="/library/books">
+                    <div class="input-group mb-3">
+                        <input type="text" name="search" class="form-control" placeholder="搜尋書名、作者或ISBN" t-att-value="request.params.get('search')"/>
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="submit">搜尋</button>
+                        </div>
+                    </div>
+                </form>
                 <ul class="list-group">
                     <t t-foreach="books" t-as="book">
                         <li class="list-group-item">
@@ -10,6 +18,9 @@
                                 <t t-esc="book.name"/>
                             </a>
                         </li>
+                    </t>
+                    <t t-if="not books">
+                        <li class="list-group-item">沒有找到相關的圖書。</li>
                     </t>
                 </ul>
             </div>
