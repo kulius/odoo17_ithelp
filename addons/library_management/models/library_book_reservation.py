@@ -21,3 +21,16 @@ class LibraryBookReservation(models.Model):
             next_reservation.write({'state': 'notified'})
             book.message_post(body=f"書籍 {book.name} 已通知讀者 {next_reservation.reserved_by.name}，可借閱。")
             # 可以在這裡設計發送通知的邏輯，例如通過郵件或訊息
+
+            # 發送電子郵件給學生
+            if next_reservation.reserved_by.email:
+                template = self.env.ref('library_management.mail_template_notify_next_reservation')
+                if template:
+                    template.sudo().send_mail(next_reservation.id, force_send=True)
+                else:
+                    # 如果沒有定義模板，可以直接使用 message_post
+                    next_reservation.reserved_by.user_id.partner_id.message_post(
+                        subject='書籍可借閱通知',
+                        body=f"親愛的 {next_reservation.reserved_by.name}，您預約的書籍《{book.name}》現在可以借閱，請盡快前往借閱。"
+                    )
+

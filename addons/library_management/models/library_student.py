@@ -7,7 +7,7 @@ class LibraryStudent(models.Model):
     name = fields.Char(string='姓名', required=True)
     student_number = fields.Char(string='學號', required=True, unique=True)
     class_name = fields.Char(string='班級')
-    email = fields.Char(string='電子郵件')
+    email = fields.Char(string='電子郵件', required=True)
     phone = fields.Char(string='電話')
     user_id = fields.Many2one('res.users', string='系統用戶', help='該學生對應的系統用戶')
     loan_ids = fields.One2many('library.book.loan', 'student_id', string='借閱記錄')

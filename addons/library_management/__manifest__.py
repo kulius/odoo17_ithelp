@@ -14,6 +14,7 @@
         'views/res_users_views.xml',
 
         'data/ir_cron_data.xml',
+        'data/mail_template_data.xml',
 
         'views/library_management_menu.xml',
 

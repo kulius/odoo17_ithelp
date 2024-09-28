@@ -1,0 +1,32 @@
+<odoo>
+    <data noupdate="1">
+        <!-- 書籍可借閱通知的郵件模板 -->
+        <record id="mail_template_notify_next_reservation" model="mail.template">
+            <field name="name">書籍可借閱通知</field>
+            <field name="model_id" ref="model_library_book_reservation"/>
+            <field name="subject">書籍可借閱通知</field>
+            <field name="email_from">${(object.company_id.email or 'noreply@example.com')|safe}</field>
+            <field name="email_to">${object.reserved_by.email|safe}</field>
+            <field name="body_html"><![CDATA[
+                <p>親愛的 ${object.reserved_by.name}，</p>
+                <p>您預約的書籍《${object.book_id.name}》現在可以借閱，請盡快前往圖書館借閱。</p>
+                <p>謝謝！</p>
+            ]]></field>
+        </record>
+
+        <!-- 逾期提醒的郵件模板 -->
+        <record id="mail_template_overdue_notification" model="mail.template">
+            <field name="name">逾期提醒通知</field>
+            <field name="model_id" ref="model_library_book_loan"/>
+            <field name="subject">逾期提醒：請盡快歸還借閱的書籍</field>
+            <field name="email_from">${(object.company_id.email or 'noreply@example.com')|safe}</field>
+            <field name="email_to">${object.student_id.email|safe}</field>
+            <field name="body_html"><![CDATA[
+                <p>親愛的 ${object.student_id.name}，</p>
+                <p>您於 ${object.loan_date} 借閱的書籍《${object.book_id.name}》已於 ${object.expected_return_date} 逾期未還。</p>
+                <p>請您盡快前往圖書館歸還該書籍，以免影響您的借閱權限。</p>
+                <p>謝謝！</p>
+            ]]></field>
+        </record>
+    </data>
+</odoo>
