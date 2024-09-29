@@ -10,8 +10,7 @@
 
     <!-- 書籍分類管理選單 -->
     <menuitem id="menu_library_book_category" name="書籍分類管理" parent="menu_library_root" sequence="4" action="action_library_book_category" groups="group_library_admin"/>
-
-
+    <menuitem id="menu_library_book_suggestions" name="購書建議管理" parent="menu_library_root" action="action_library_book_suggestions" sequence="1" groups="group_library_admin"/>
     <!-- 學生借閱歷史的選單 -->
     <menuitem id="menu_library_student_loans" name="我的借閱歷史"
               parent="menu_library_root" sequence="5"

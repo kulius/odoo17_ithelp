@@ -1,5 +1,5 @@
 {
-    'name': 'Library Management',
+    'name': 'library_management',
     'version': '17.0',
     'depends': ['base', 'mail', 'website'],
     'data': [
@@ -13,6 +13,8 @@
 
         'views/res_users_views.xml',
         'views/library_book_templates.xml',
+        'views/library_book_suggestion_views.xml',
+        'views/library_book_suggestion_templates.xml',
 
         'data/ir_cron_data.xml',
         'data/mail_template_data.xml',

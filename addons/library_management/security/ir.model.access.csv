@@ -5,4 +5,6 @@ access_library_book_category,書籍分類管理,model_library_book_category,,1,1
 access_library_book_reservation,借閱預約,model_library_book_reservation,,1,1,1,1
 access_library_book_reservation,借閱預約,model_library_book_reservation,,1,1,1,1
 access_library_book_loan,書籍借閱記錄,model_library_book_loan,,1,1,1,1
+access_library_book_suggestion,購書建議,model_library_book_suggestion,,1,1,1,0
+
 

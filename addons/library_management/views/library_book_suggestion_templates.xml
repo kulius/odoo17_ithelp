@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+        <!-- 購書建議頁面的模板 -->
+        <template id="library_book_suggestion_template">
+            <field name="website_id">False</field>
+            <t t-call="website.layout">
+                <div class="container mt-5">
+                    <h2>我的購書建議</h2>
+                    <a href="/my/book_suggestions/new" class="btn btn-primary mb-3">提交購書建議</a>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>書名</th>
+                                <th>作者</th>
+                                <th>ISBN</th>
+                                <th>建議日期</th>
+                                <th>狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="suggestions" t-as="s">
+                                <tr>
+                                    <td><t t-esc="s.name"/></td>
+                                    <td><t t-esc="s.author or '-'"/></td>
+                                    <td><t t-esc="s.isbn or '-'"/></td>
+                                    <td><t t-esc="s.suggestion_date"/></td>
+                                    <td><t t-esc="dict(s.fields_get(['state'])['state']['selection'])[s.state]"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <!-- 購書建議提交頁面的模板 -->
+        <template id="library_book_suggestion_form_template">
+            <t t-call="website.layout">
+                <div class="container mt-5">
+                    <h2>提交購書建議</h2>
+                    <form action="/my/book_suggestions/submit" method="post" class="mt-3">
+                        <!-- 添加 CSRF 令牌 -->
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                        <div class="form-group">
+                            <label for="name">書名<span style="color:red;">*</span></label>
+                            <input type="text" name="name" required="True" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="author">作者</label>
+                            <input type="text" name="author" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" name="isbn" class="form-control"/>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">提交</button>
+                        <a href="/my/booksuggestions" class="btn btn-secondary mt-3">返回</a>
+                    </form>
+                </div>
+            </t>
+        </template>
+
+        <!-- 感謝頁面的模板 -->
+        <template id="library_book_suggestion_thankyou_template">
+            <t t-call="website.layout">
+                <div class="container mt-5">
+                    <h2>感謝您的購書建議！</h2>
+                    <a href="/my/booksuggestions" class="btn btn-primary mt-3">返回我的購書建議</a>
+                </div>
+            </t>
+        </template>
+
+        <record id="library_book_suggestion_page" model="website.page">
+            <field name="name">購書建議</field>
+            <field name="is_published">True</field>
+            <field name="website_published">True</field>
+            <field name="url">/my/booksuggestions</field>
+            <field name="view_id" ref="library_management.library_book_suggestion_template"/>
+        </record>
+        <record id="menu_library_book_suggestion" model="website.menu">
+            <field name="name">購書建議</field>
+            <field name="page_id" ref="library_management.library_book_suggestion_page"/>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">70</field>
+        </record>
+    </data>
+</odoo>
