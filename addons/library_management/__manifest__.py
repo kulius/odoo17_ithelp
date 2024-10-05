@@ -15,6 +15,7 @@
         'views/library_book_templates.xml',
         'views/library_book_suggestion_views.xml',
         'views/library_book_suggestion_templates.xml',
+        'reports/library_reports.xml',
 
         'data/ir_cron_data.xml',
         'data/mail_template_data.xml',

@@ -65,11 +65,32 @@
         </field>
     </record>
 
+    <record id="view_library_book_graph" model="ir.ui.view">
+        <field name="name">library.book.graph</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <graph string="借閱排行">
+                <field name="loan_count" type="measure"/>
+                <field name="name" type="row"/>
+            </graph>
+        </field>
+    </record>
+    <record id="view_library_book_pivot" model="ir.ui.view">
+        <field name="name">library.book.pivot</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <pivot string="館藏利用率">
+                <field name="category_id" type="row"/>
+                <field name="loan_count" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
         <!-- 書籍管理動作 -->
     <record id="action_library_books" model="ir.actions.act_window">
         <field name="name">書籍管理</field>
         <field name="res_model">library.book</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
         <field name="view_id" ref="view_library_book_tree"/>
     </record>
 
@@ -106,6 +127,8 @@
             </search>
         </field>
     </record>
+
+
 
     <!-- 專門供讀者使用的書籍操作動作，隱藏新增按鈕 -->
     <record id="action_library_books_readonly" model="ir.actions.act_window">

@@ -11,6 +11,14 @@ class LibraryStudent(models.Model):
     phone = fields.Char(string='電話')
     user_id = fields.Many2one('res.users', string='系統用戶', help='該學生對應的系統用戶')
     loan_ids = fields.One2many('library.book.loan', 'student_id', string='借閱記錄')
+    loan_count = fields.Integer(string='借閱次數', compute='_compute_loan_count', store=True)
+
+    def _compute_loan_count(self):
+        for student in self:
+            student.loan_count = self.env['library.book.loan'].search_count([
+                ('student_id', '=', student.id),
+                ('state', '=', 'returned')
+            ])
 
     @api.model
     def create(self, vals):

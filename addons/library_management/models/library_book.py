@@ -16,6 +16,14 @@ class LibraryBook(models.Model):
     return_date = fields.Date(string='歸還日期', readonly=True, tracking=True)
     reservation_ids = fields.One2many('library.book.reservation', 'book_id', string='預約列表')
     loan_ids = fields.One2many('library.book.loan', 'book_id', string='借閱記錄')
+    loan_count = fields.Integer(string='借閱次數', compute='_compute_loan_count', store=True)
+
+    def _compute_loan_count(self):
+        for book in self:
+            book.loan_count = self.env['library.book.loan'].search_count([
+                ('book_id', '=', book.id),
+                ('state', '=', 'returned')
+            ])
 
     def action_reserve(self):
         """

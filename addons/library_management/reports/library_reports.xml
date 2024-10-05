@@ -1,0 +1,40 @@
+<odoo>
+    <template id="report_library_book_loan">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <h2>借閱排行報表</h2>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>isbn</th>
+                            <th>書名</th>
+                            <th>借閱次數</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="docs" t-as="book">
+                            <tr>
+                                <td><t t-esc="book.isbn"/></td>
+                                <td><t t-esc="book.name"/></td>
+                                <td><t t-esc="book.loan_count"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+
+    <record id="action_report_library_book_loan" model="ir.actions.report">
+        <field name="name">借閱排行報表</field>
+        <field name="model">library.book</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">library_management.report_library_book_loan</field>
+        <field name="report_file">library_management.report_library_book_loan</field>
+        <field name="print_report_name">'借閱排行報表 - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_library_book"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+</odoo>

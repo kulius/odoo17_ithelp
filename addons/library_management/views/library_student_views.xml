@@ -39,10 +39,21 @@
         </field>
     </record>
 
+    <record id="view_library_student_graph" model="ir.ui.view">
+        <field name="name">library.student.graph</field>
+        <field name="model">library.student</field>
+        <field name="arch" type="xml">
+            <graph string="讀者活躍度">
+                <field name="loan_count" type="measure"/>
+                <field name="name" type="row"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- 學生管理動作 -->
     <record id="action_library_students" model="ir.actions.act_window">
         <field name="name">學生管理</field>
         <field name="res_model">library.student</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph</field>
     </record>
 </odoo>
