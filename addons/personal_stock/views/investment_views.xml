@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_investment_form" model="ir.ui.view">
+        <field name="name">stock.investment.form</field>
+        <field name="model">stock.investment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="stock_id"/>
+                        <field name="date"/>
+                        <field name="price"/>
+                        <field name="quantity"/>
+                        <field name="profit_loss"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_investment_tree" model="ir.ui.view">
+        <field name="name">stock.investment.tree</field>
+        <field name="model">stock.investment</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="stock_id"/>
+                <field name="date"/>
+                <field name="price"/>
+                <field name="quantity"/>
+                <field name="profit_loss"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_investment" model="ir.actions.act_window">
+        <field name="name">投資記錄</field>
+        <field name="res_model">stock.investment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

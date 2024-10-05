@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_stock,stock.stock,model_stock_stock,base.group_user,1,1,1,1
+access_stock_investment,stock.investment,model_stock_investment,base.group_user,1,1,1,1
+access_stock_daily_price,stock.daily.price,model_stock_daily_price,base.group_user,1,1,1,1
+access_stock_advice,stock.advice,model_stock_advice,base.group_user,1,1,1,1

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_update_stock_prices" model="ir.cron">
+            <field name="name">更新股票價格</field>
+            <field name="model_id" ref="model_stock_stock"/>
+            <field name="state">code</field>
+            <field name="code">model
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_form" model="ir.ui.view">
+        <field name="name">stock.stock.form</field>
+        <field name="model">stock.stock</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="current_price"/>
+                        <field name="last_update"/>
+                        <field name="total_value"/>
+                    </group>
+                    <notebook>
+                        <page string="投資記錄">
+                            <field name="investment_ids"/>
+                        </page>
+                        <page string="每日價格">
+                            <field name="daily_price_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_tree" model="ir.ui.view">
+        <field name="name">stock.stock.tree</field>
+        <field name="model">stock.stock</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="current_price"/>
+                <field name="total_value"/>
+                <field name="last_update"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock" model="ir.actions.act_window">
+        <field name="name">股票</field>
+        <field name="res_model">stock.stock</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

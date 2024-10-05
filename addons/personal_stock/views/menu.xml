@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_personal_stock_root" name="個人投資管理" sequence="10">
+        <menuitem id="menu_stock" name="股票" action="action_stock" sequence="10"/>
+        <menuitem id="menu_investment" name="投資記錄" action="action_investment" sequence="20"/>
+        <menuitem id="menu_daily_price" name="每日股價" action="action_daily_price" sequence="30"/>
+        <menuitem id="menu_advice" name="投資建議" action="action_advice" sequence="40"/>
+    </menuitem>
+</odoo>

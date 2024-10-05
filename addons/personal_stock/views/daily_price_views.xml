@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_daily_price_form" model="ir.ui.view">
+        <field name="name">stock.daily.price.form</field>
+        <field name="model">stock.daily.price</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="stock_id"/>
+                        <field name="date"/>
+                        <field name="open_price"/>
+                        <field name="close_price"/>
+                        <field name="high_price"/>
+                        <field name="low_price"/>
+                        <field name="volume"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_daily_price_tree" model="ir.ui.view">
+        <field name="name">stock.daily.price.tree</field>
+        <field name="model">stock.daily.price</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="stock_id"/>
+                <field name="date"/>
+                <field name="open_price"/>
+                <field name="close_price"/>
+                <field name="high_price"/>
+                <field name="low_price"/>
+                <field name="volume"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_daily_price" model="ir.actions.act_window">
+        <field name="name">每日股價</field>
+        <field name="res_model">stock.daily.price</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
