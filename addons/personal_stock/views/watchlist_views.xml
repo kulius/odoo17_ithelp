@@ -23,6 +23,8 @@
             <form>
                 <header>
                     <button name="update_stock_info" string="更新股票資訊" type="object" class="oe_highlight"/>
+                    <button name="update_kline_data" string="更新K線數據" type="object" class="oe_highlight"/>
+                    <button name="show_kline_chart" string="顯示K線圖" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
@@ -34,6 +36,20 @@
                         <field name="change_percentage"/>
                         <field name="last_update"/>
                     </group>
+                    <notebook>
+                        <page>
+                            <field name="kline_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="open_price"/>
+                                    <field name="close_price"/>
+                                    <field name="high_price"/>
+                                    <field name="low_price"/>
+                                    <field name="volume"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
