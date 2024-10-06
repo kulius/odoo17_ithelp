@@ -36,13 +36,8 @@
     'application': True,
     'auto_install': False,
     'license': 'LGPL-3',
-    'assets': {
-        'web.assets_backend': [
-            'personal_stock/static/src/js/stock_chart.js',
-            'personal_stock/static/src/xml/stock_chart_template.xml',
-        ],
-    },
     'external_dependencies': {
         'python': ['mplfinance', 'matplotlib', 'pandas'],
     },
+
 }

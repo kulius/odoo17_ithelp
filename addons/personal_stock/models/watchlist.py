@@ -1,3 +1,5 @@
+from operator import truediv
+
 from odoo import models, fields, api
 import twstock
 from datetime import datetime, timedelta
@@ -126,4 +128,3 @@ class StockWatchlist(models.Model):
             'target': 'new',
         }
 
-    # 保留其他方法的定義

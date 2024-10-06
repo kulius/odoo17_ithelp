@@ -72,8 +72,9 @@
    - https://github.com/HowardNTUST/Marketing-Data-Science-Application/tree/master/%E9%80%8F%E9%81%8E%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E9%A0%90%E6%B8%AC%E8%82%A1%E5%B8%82%E6%BC%B2%E8%B7%8C
 4. **巴小智口袋名單**
    - https://github.com/jasonblog/Stock/blob/master/chapter/11.md
-5. **Plotly 繪製互動式K線圖**
-   - https://plotly.com/python/candlestick-charts/
+6. **使用 TradingView 嵌入式圖表**
+   - 可以嵌入到網頁中，提供互動式的K線圖。
+   - https://cn.tradingview.com/widget/advanced-chart/
 
 ## 使用者故事
 
