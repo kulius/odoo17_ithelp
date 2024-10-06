@@ -1,0 +1,15 @@
+{
+    // 可以設定你放全部的 venvs 環境的根目錄資料夾
+    "python.venvPath": "D:\\odoo\\python31011_odoo17_venv",
+    "python.autoComplete.extraPaths": [
+            "D:\\odoo\\odoo_17\\",
+        ],
+        "python.analysis.extraPaths": [
+            "D:\\odoo\\odoo_17\\",
+        ],
+
+    "python.terminal.activateEnvironment": true, // 自動啟動環境
+    "python.linting.pylintEnabled": true,  // 需要 pip install pylint
+    "python.linting.enabled": true,
+    "python.languageServer": "None", // 需要 pip install pylint
+}

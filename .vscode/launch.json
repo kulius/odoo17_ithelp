@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    //"--update=library_management",
+    "version": "0.2.0",
+    "configurations": [
+        {
+        "name": "Python: Odoo17 元植",
+        "type": "debugpy",
+        "request": "launch",
+        "stopOnEntry": false,
+        "python": "D:\\odoo\\python31011_odoo17_venv\\Scripts\\python.exe", //path of python in your local machine where odoo has installed
+        "console": "integratedTerminal",
+        "program": "D:\\odoo\\odoo17_ithelp\\odoo-17.0\\odoo-bin",
+        "args": [
+            "--config=D:\\odoo\\odoo17_ithelp\\odoo-17.0\\odoo.conf",
+        ],
+        "cwd": "${workspaceRoot}",
+
+    }]
+}
