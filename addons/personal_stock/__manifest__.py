@@ -27,6 +27,7 @@
         'views/watchlist_views.xml',
         'views/menu.xml',
         'data/demo_data.xml',
+        'data/cron_jobs.xml',
     ],
     'demo': [
         'data/demo_data.xml',
