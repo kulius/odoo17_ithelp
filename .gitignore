@@ -1,2 +1,4 @@
 /odoo-17.0/
 /.idea
+/*.pyc
+/.vscode

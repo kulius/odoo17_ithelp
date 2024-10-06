@@ -13,6 +13,7 @@
 - 個人股票每日漲跌記錄
 - 所有股票的漲跌情況總覽
 - 購買及賣出股票的建議
+- 自定義股票觀察名單
     """,
     'author': 'Your Company',
     'website': 'https://www.yourcompany.com',
@@ -23,9 +24,13 @@
         'views/investment_views.xml',
         'views/daily_price_views.xml',
         'views/advice_views.xml',
+        'views/watchlist_views.xml',
         'views/menu.xml',
+        'data/demo_data.xml',
     ],
-    'demo': [],
+    'demo': [
+        'data/demo_data.xml',
+    ],
     'installable': True,
     'application': True,
     'auto_install': False,

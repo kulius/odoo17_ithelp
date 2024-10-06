@@ -15,6 +15,7 @@
         "program": "D:\\odoo\\odoo17_ithelp\\odoo-17.0\\odoo-bin",
         "args": [
             "--config=D:\\odoo\\odoo17_ithelp\\odoo-17.0\\odoo.conf",
+            "--update=personal_stock",
         ],
         "cwd": "${workspaceRoot}",
 

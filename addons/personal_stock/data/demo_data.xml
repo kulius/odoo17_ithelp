@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="watchlist_1" model="stock.watchlist">
+            <field name="name">亞泥</field>
+            <field name="stock_code">1102</field>
+        </record>
+
+        <record id="watchlist_2" model="stock.watchlist">
+            <field name="name">台塑</field>
+            <field name="stock_code">1301</field>
+        </record>
+
+        <record id="watchlist_3" model="stock.watchlist">
+            <field name="name">遠東新</field>
+            <field name="stock_code">1402</field>
+        </record>
+
+        <record id="watchlist_4" model="stock.watchlist">
+            <field name="name">中碳</field>
+            <field name="stock_code">1723</field>
+        </record>
+
+        <record id="watchlist_5" model="stock.watchlist">
+            <field name="name">豐興</field>
+            <field name="stock_code">2015</field>
+        </record>
+
+        <record id="watchlist_6" model="stock.watchlist">
+            <field name="name">台橡</field>
+            <field name="stock_code">2103</field>
+        </record>
+
+        <record id="watchlist_7" model="stock.watchlist">
+            <field name="name">光寶科</field>
+            <field name="stock_code">2301</field>
+        </record>
+
+        <record id="watchlist_8" model="stock.watchlist">
+            <field name="name">仁寶</field>
+            <field name="stock_code">2324</field>
+        </record>
+
+        <record id="watchlist_9" model="stock.watchlist">
+            <field name="name">矽品</field>
+            <field name="stock_code">2325</field>
+        </record>
+
+        <record id="watchlist_10" model="stock.watchlist">
+            <field name="name">聯強</field>
+            <field name="stock_code">2347</field>
+        </record>
+
+        <record id="watchlist_11" model="stock.watchlist">
+            <field name="name">技嘉</field>
+            <field name="stock_code">2376</field>
+        </record>
+
+        <record id="watchlist_12" model="stock.watchlist">
+            <field name="name">中華電</field>
+            <field name="stock_code">2412</field>
+        </record>
+
+        <record id="watchlist_13" model="stock.watchlist">
+            <field name="name">創見</field>
+            <field name="stock_code">2451</field>
+        </record>
+
+        <record id="watchlist_14" model="stock.watchlist">
+            <field name="name">華南金</field>
+            <field name="stock_code">2880</field>
+        </record>
+
+        <record id="watchlist_15" model="stock.watchlist">
+            <field name="name">兆豐金</field>
+            <field name="stock_code">2886</field>
+        </record>
+
+        <record id="watchlist_16" model="stock.watchlist">
+            <field name="name">中信金</field>
+            <field name="stock_code">2891</field>
+        </record>
+
+        <record id="watchlist_17" model="stock.watchlist">
+            <field name="name">第一金</field>
+            <field name="stock_code">2892</field>
+        </record>
+
+        <record id="watchlist_18" model="stock.watchlist">
+            <field name="name">華立</field>
+            <field name="stock_code">3010</field>
+        </record>
+
+        <record id="watchlist_19" model="stock.watchlist">
+            <field name="name">德律</field>
+            <field name="stock_code">3030</field>
+        </record>
+
+        <record id="watchlist_20" model="stock.watchlist">
+            <field name="name">健鼎</field>
+            <field name="stock_code">3044</field>
+        </record>
+
+        <record id="watchlist_21" model="stock.watchlist">
+            <field name="name">緯創</field>
+            <field name="stock_code">3231</field>
+        </record>
+
+        <record id="watchlist_22" model="stock.watchlist">
+            <field name="name">大聯大</field>
+            <field name="stock_code">3702</field>
+        </record>
+
+        <record id="watchlist_23" model="stock.watchlist">
+            <field name="name">崇越</field>
+            <field name="stock_code">5434</field>
+        </record>
+
+        <record id="watchlist_24" model="stock.watchlist">
+            <field name="name">松翰</field>
+            <field name="stock_code">5471</field>
+        </record>
+
+        <record id="watchlist_25" model="stock.watchlist">
+            <field name="name">鎰勝</field>
+            <field name="stock_code">6115</field>
+        </record>
+
+        <record id="watchlist_26" model="stock.watchlist">
+            <field name="name">豐藝</field>
+            <field name="stock_code">6189</field>
+        </record>
+
+        <record id="watchlist_27" model="stock.watchlist">
+            <field name="name">巨路</field>
+            <field name="stock_code">6192</field>
+        </record>
+
+        <record id="watchlist_28" model="stock.watchlist">
+            <field name="name">聚鼎</field>
+            <field name="stock_code">6224</field>
+        </record>
+
+        <record id="watchlist_29" model="stock.watchlist">
+            <field name="name">力成</field>
+            <field name="stock_code">6239</field>
+        </record>
+
+        <record id="watchlist_30" model="stock.watchlist">
+            <field name="name">中鼎</field>
+            <field name="stock_code">9933</field>
+        </record>
+    </data>
+</odoo>

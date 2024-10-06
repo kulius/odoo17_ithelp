@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_watchlist_form" model="ir.ui.view">
+        <field name="name">stock.watchlist.form</field>
+        <field name="model">stock.watchlist</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="stock_code"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_watchlist_tree" model="ir.ui.view">
+        <field name="name">stock.watchlist.tree</field>
+        <field name="model">stock.watchlist</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="stock_code"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="action_watchlist" model="ir.actions.act_window">
+        <field name="name">觀察名單</field>
+        <field name="res_model">stock.watchlist</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

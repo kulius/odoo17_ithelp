@@ -5,5 +5,6 @@
         <menuitem id="menu_investment" name="投資記錄" action="action_investment" sequence="20"/>
         <menuitem id="menu_daily_price" name="每日股價" action="action_daily_price" sequence="30"/>
         <menuitem id="menu_advice" name="投資建議" action="action_advice" sequence="40"/>
+        <menuitem id="menu_watchlist" name="觀察名單" action="action_watchlist" sequence="50"/>
     </menuitem>
 </odoo>
