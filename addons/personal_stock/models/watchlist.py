@@ -9,6 +9,7 @@ import mplfinance as mpf
 import pandas as pd
 import io
 import base64
+import numpy as np
 
 _logger = logging.getLogger(__name__)
 
@@ -24,6 +25,7 @@ class StockWatchlist(models.Model):
     change_percentage = fields.Float(string='漲跌幅(%)', digits=(5, 2))
     last_update = fields.Datetime(string='最後更新時間')
     kline_ids = fields.One2many('stock.kline', 'watchlist_id', string='K線數據')
+    advice_ids = fields.One2many('stock.watchlist.advice', 'watchlist_id', string='投資建議')
 
     def update_stock_info(self):
         for record in self:
@@ -127,4 +129,95 @@ class StockWatchlist(models.Model):
             'url': f'/web/content/{attachment.id}?download=true',
             'target': 'new',
         }
+
+    def generate_advice(self):
+        self.ensure_one()
+        today = fields.Date.today()- timedelta(days=1)
+
+        # 獲取最近30天的K線數據
+        kline_data = self.env['stock.kline'].search([
+            ('watchlist_id', '=', self.id),
+            ('date', '>=', today - timedelta(days=60)),
+            ('date', '<=', today)
+        ], order='date asc')
+
+        if len(kline_data) < 30:
+            return  # 數據不足，無法生成建議
+
+        # 計算技術指標
+        close_prices = np.array(kline_data.mapped('close_price'))
+        sma5 = np.mean(close_prices[-5:])
+        sma20 = np.mean(close_prices[-20:])
+        rsi = self._calculate_rsi(close_prices)
+
+        # 生成建議
+        advice_type = 'hold'
+        reason = []
+        confidence = 'medium'
+
+        if close_prices[-1] > sma5 and sma5 > sma20:
+            advice_type = 'buy'
+            reason.append('價格突破5日和20日均線')
+            confidence = 'high'
+        elif close_prices[-1] < sma5 and sma5 < sma20:
+            advice_type = 'sell'
+            reason.append('價格跌破5日和20日均線')
+            confidence = 'high'
+
+        if rsi > 70:
+            advice_type = 'sell'
+            reason.append('RSI超買（{}）'.format(round(rsi, 2)))
+        elif rsi < 30:
+            advice_type = 'buy'
+            reason.append('RSI超賣（{}）'.format(round(rsi, 2)))
+
+        # 創建或更新建議
+        advice = self.env['stock.watchlist.advice'].search([
+            ('watchlist_id', '=', self.id),
+            ('date', '=', today)
+        ])
+
+        advice_data = {
+            'watchlist_id': self.id,
+            'date': today,
+            'advice_type': advice_type,
+            'reason': ', '.join(reason),
+            'target_price': close_prices[-1],  # 使用最新收盤價作為目標價格
+            'confidence': confidence
+        }
+
+        if advice:
+            advice.write(advice_data)
+        else:
+            self.env['stock.watchlist.advice'].create(advice_data)
+
+    def _calculate_rsi(self, prices, period=14):
+        deltas = np.diff(prices)
+        seed = deltas[:period+1]
+        up = seed[seed >= 0].sum()/period
+        down = -seed[seed < 0].sum()/period
+        rs = up/down
+        rsi = np.zeros_like(prices)
+        rsi[:period] = 100. - 100./(1. + rs)
+
+        for i in range(period, len(prices)):
+            delta = deltas[i-1]
+            if delta > 0:
+                upval = delta
+                downval = 0.
+            else:
+                upval = 0.
+                downval = -delta
+
+            up = (up*(period-1) + upval)/period
+            down = (down*(period-1) + downval)/period
+            rs = up/down
+            rsi[i] = 100. - 100./(1. + rs)
+
+        return rsi[-1]
+
+    def generate_all_advice(self):
+        watchlists = self.search([])
+        for watchlist in watchlists:
+            watchlist.generate_advice()
 

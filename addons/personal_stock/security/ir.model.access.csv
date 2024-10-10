@@ -5,3 +5,4 @@ access_stock_daily_price,stock.daily.price,model_stock_daily_price,base.group_us
 access_stock_advice,stock.advice,model_stock_advice,base.group_user,1,1,1,1
 access_stock_watchlist,stock.watchlist,model_stock_watchlist,base.group_user,1,1,1,1
 access_stock_kline,stock.kline,model_stock_kline,base.group_user,1,1,1,1
+access_stock_watchlist_advice,stock.watchlist.advice,model_stock_watchlist_advice,base.group_user,1,1,1,1

@@ -39,5 +39,4 @@
     'external_dependencies': {
         'python': ['mplfinance', 'matplotlib', 'pandas'],
     },
-
 }

@@ -25,7 +25,7 @@
                     <button name="update_stock_info" string="更新股票資訊" type="object" class="oe_highlight"/>
                     <button name="update_kline_data" string="更新K線數據" type="object" class="oe_highlight"/>
                     <button name="show_kline_chart" string="顯示K線圖" type="object" class="oe_highlight"/>
-
+                    <button name="generate_advice" string="生成建議" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
@@ -38,7 +38,7 @@
                         <field name="last_update"/>
                     </group>
                     <notebook>
-                        <page>
+                        <page string="K線數據">
                             <field name="kline_ids">
                                 <tree>
                                     <field name="date"/>
@@ -47,6 +47,17 @@
                                     <field name="high_price"/>
                                     <field name="low_price"/>
                                     <field name="volume"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="投資建議">
+                            <field name="advice_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="advice_type"/>
+                                    <field name="reason"/>
+                                    <field name="target_price"/>
+                                    <field name="confidence"/>
                                 </tree>
                             </field>
                         </page>
