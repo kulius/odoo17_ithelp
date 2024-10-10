@@ -37,6 +37,6 @@
     'auto_install': False,
     'license': 'LGPL-3',
     'external_dependencies': {
-        'python': ['mplfinance', 'matplotlib', 'pandas'],
+        'python': ['mplfinance', 'matplotlib', 'pandas','scikit-learn'],
     },
 }

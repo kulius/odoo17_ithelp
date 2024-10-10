@@ -10,6 +10,9 @@ import pandas as pd
 import io
 import base64
 import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 _logger = logging.getLogger(__name__)
 
@@ -26,6 +29,8 @@ class StockWatchlist(models.Model):
     last_update = fields.Datetime(string='最後更新時間')
     kline_ids = fields.One2many('stock.kline', 'watchlist_id', string='K線數據')
     advice_ids = fields.One2many('stock.watchlist.advice', 'watchlist_id', string='投資建議')
+    prediction = fields.Selection([('up', '上漲'), ('down', '下跌')], string='預測結果')
+    prediction_confidence = fields.Float(string='預測置信度', digits=(5, 2))
 
     def update_stock_info(self):
         for record in self:
@@ -220,4 +225,26 @@ class StockWatchlist(models.Model):
         watchlists = self.search([])
         for watchlist in watchlists:
             watchlist.generate_advice()
+
+    def predict_stock_movement(self):
+        self.ensure_one()
+        prediction_model = self.env['stock.prediction'].search([('watchlist_id', '=', self.id)], limit=1)
+
+        if not prediction_model:
+            prediction_model = self.env['stock.prediction'].create({
+                'watchlist_id': self.id,
+            })
+
+        prediction_model.train_model()
+        prediction, confidence = prediction_model.make_prediction()
+
+        self.write({
+            'prediction': 'up' if prediction == 1 else 'down',
+            'prediction_confidence': confidence * 100
+        })
+
+    def update_all_predictions(self):
+        watchlists = self.search([])
+        for watchlist in watchlists:
+            watchlist.predict_stock_movement()
 

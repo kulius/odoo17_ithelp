@@ -11,6 +11,8 @@
                 <field name="previous_close"/>
                 <field name="price_change"/>
                 <field name="change_percentage"/>
+                <field name="prediction"/>
+                <field name="prediction_confidence"/>
                 <field name="last_update"/>
             </tree>
         </field>
@@ -23,19 +25,26 @@
             <form>
                 <header>
                     <button name="update_stock_info" string="更新股票資訊" type="object" class="oe_highlight"/>
-                    <button name="update_kline_data" string="更新K線數據" type="object" class="oe_highlight"/>
-                    <button name="show_kline_chart" string="顯示K線圖" type="object" class="oe_highlight"/>
-                    <button name="generate_advice" string="生成建議" type="object" class="oe_highlight"/>
+                    <button name="update_kline_data" string="更新K線數據" type="object"/>
+                    <button name="show_kline_chart" string="顯示K線圖" type="object"/>
+                    <button name="generate_advice" string="生成建議" type="object"/>
+                    <button name="predict_stock_movement" string="預測股票走勢" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="stock_code"/>
-                        <field name="current_price"/>
-                        <field name="previous_close"/>
-                        <field name="price_change"/>
-                        <field name="change_percentage"/>
-                        <field name="last_update"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="stock_code"/>
+                            <field name="current_price"/>
+                            <field name="previous_close"/>
+                        </group>
+                        <group>
+                            <field name="price_change"/>
+                            <field name="change_percentage"/>
+                            <field name="last_update"/>
+                            <field name="prediction"/>
+                            <field name="prediction_confidence" widget="percentage"/>
+                        </group>
                     </group>
                     <notebook>
                         <page string="K線數據">
@@ -72,5 +81,6 @@
         <field name="res_model">stock.watchlist</field>
         <field name="view_mode">tree,form</field>
     </record>
+
 
 </odoo>
