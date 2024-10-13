@@ -29,6 +29,7 @@
                     <button name="show_kline_chart" string="顯示K線圖" type="object"/>
                     <button name="generate_advice" string="生成建議" type="object"/>
                     <button name="predict_stock_movement" string="預測股票走勢" type="object" class="oe_highlight"/>
+                    <button name="fetch_anue_news" string="獲取鉅亨網新聞" type="object" class="oe_highlight"/>
                 </header>
                 <sheet>
                     <group>
@@ -67,6 +68,16 @@
                                     <field name="reason"/>
                                     <field name="target_price"/>
                                     <field name="confidence"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="相關新聞和公告">
+                            <field name="news_ids">
+                                <tree>
+                                    <field name="title"/>
+                                    <field name="publish_date"/>
+                                    <field name="news_type"/>
+                                    <field name="importance"/>
                                 </tree>
                             </field>
                         </page>

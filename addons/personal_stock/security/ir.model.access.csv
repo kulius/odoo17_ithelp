@@ -7,3 +7,4 @@ access_stock_watchlist,stock.watchlist,model_stock_watchlist,base.group_user,1,1
 access_stock_kline,stock.kline,model_stock_kline,base.group_user,1,1,1,1
 access_stock_watchlist_advice,stock.watchlist.advice,model_stock_watchlist_advice,base.group_user,1,1,1,1
 access_stock_prediction,stock.prediction,model_stock_prediction,base.group_user,1,1,1,1
+access_stock_news,stock.news,model_stock_news,base.group_user,1,1,1,1

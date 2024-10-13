@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_news_form" model="ir.ui.view">
+        <field name="name">stock.news.form</field>
+        <field name="model">stock.news</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="watchlist_id"/>
+                            <field name="title"/>
+                            <field name="source"/>
+                            <field name="publish_date"/>
+                        </group>
+                        <group>
+                            <field name="news_type"/>
+                            <field name="importance"/>
+                            <field name="url"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="內容摘要">
+                            <field name="content"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_stock_news_tree" model="ir.ui.view">
+        <field name="name">stock.news.tree</field>
+        <field name="model">stock.news</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="watchlist_id"/>
+                <field name="publish_date"/>
+                <field name="title"/>
+                <field name="source"/>
+                <field name="news_type"/>
+                <field name="importance"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_news" model="ir.actions.act_window">
+        <field name="name">股票新聞和公告</field>
+        <field name="res_model">stock.news</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

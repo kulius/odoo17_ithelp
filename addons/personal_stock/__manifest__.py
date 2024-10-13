@@ -25,6 +25,7 @@
         'views/daily_price_views.xml',
         'views/advice_views.xml',
         'views/watchlist_views.xml',
+        'views/stock_news_views.xml',
         'views/menu.xml',
         'data/demo_data.xml',
         'data/cron_jobs.xml',
@@ -37,6 +38,6 @@
     'auto_install': False,
     'license': 'LGPL-3',
     'external_dependencies': {
-        'python': ['mplfinance', 'matplotlib', 'pandas','scikit-learn'],
+        'python': ['mplfinance', 'matplotlib', 'pandas','scikit-learn', 'requests', 'beautifulsoup4','textblob', 'jieba'],
     },
 }

@@ -13,6 +13,11 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import requests
+from bs4 import BeautifulSoup
+import re
+import time
+import random
 
 _logger = logging.getLogger(__name__)
 
@@ -31,6 +36,7 @@ class StockWatchlist(models.Model):
     advice_ids = fields.One2many('stock.watchlist.advice', 'watchlist_id', string='投資建議')
     prediction = fields.Selection([('up', '上漲'), ('down', '下跌')], string='預測結果')
     prediction_confidence = fields.Float(string='預測置信度', digits=(5, 2))
+    news_ids = fields.One2many('stock.news', 'watchlist_id', string='相關新聞和公告')
 
     def update_stock_info(self):
         for record in self:
@@ -247,4 +253,77 @@ class StockWatchlist(models.Model):
         watchlists = self.search([])
         for watchlist in watchlists:
             watchlist.predict_stock_movement()
+
+    def get_newslist_info(self, page=1, limit=30):
+        """ 房屋詳情
+
+        :param page: 頁數
+        :param limit: 一頁新聞數量
+        :return newslist_info: 新聞資料
+        """
+        headers = {
+            'Origin': 'https://news.cnyes.com/',
+            'Referer': 'https://news.cnyes.com/',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        }
+        r = requests.get(f"https://api.cnyes.com/media/api/v1/newslist/category/headline?page={page}&limit={limit}",
+                         headers=headers)
+        if r.status_code != requests.codes.ok:
+            print('請求失敗', r.status_code)
+            return None
+        newslist_info = r.json()['items']
+        return newslist_info
+
+    def fetch_anue_news(self):
+        self.ensure_one()
+        total_news = 0
+        page = 1
+        limit = 30
+        one_year_ago = datetime.now() - timedelta(days=365)
+
+        while True:
+            newslist_info = self.get_newslist_info(page, limit)
+            time.sleep(random.uniform(2, 5))
+
+            if not newslist_info:
+                break
+
+            total_news = newslist_info["total"]
+
+            for news in newslist_info["data"]:
+                publish_date = datetime.fromtimestamp(news["publishAt"])
+
+                if publish_date < one_year_ago:
+                    break
+
+                news_url = f'https://news.cnyes.com/news/id/{news["newsId"]}'
+                existing_news = self.env['stock.news'].search([('url', '=', news_url)])
+
+                if not existing_news:
+                    self.env['stock.news'].create({
+                        'title': news["title"],
+                        'content': news["summary"],
+                        'url': news_url,
+                        'publish_date': publish_date,
+                        'source': '鉅亨網',
+                        'news_type': 'other',
+                        'importance': 'medium',
+                    })
+
+            if len(newslist_info["data"]) < limit or publish_date < one_year_ago:
+                break
+
+            page += 1
+
+        self._cr.commit()  # 提交事務
+
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'display_notification',
+            'params': {
+                'title': '新聞更新',
+                'message': f'已成功從鉅亨網獲取並更新 {total_news} 條相關新聞',
+                'sticky': False,
+            }
+        }
 
